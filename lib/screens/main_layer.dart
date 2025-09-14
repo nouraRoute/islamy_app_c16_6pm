@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:islamy_app_c16_6pm/common/app_consts.dart';
 import 'package:islamy_app_c16_6pm/common/common_decorations.dart';
+import 'package:islamy_app_c16_6pm/tabs/hadeeth_tab/hadeeth_tab.dart';
 import 'package:islamy_app_c16_6pm/tabs/quran_tab/quran_tab.dart';
 
 class MainLayer extends StatefulWidget {
@@ -15,7 +16,7 @@ class _MainLayerState extends State<MainLayer> {
   int currentTab = 0;
   List<Widget> tabs = [
     QuranTab(),
-    Container(color: Colors.red),
+    HadeethTab(),
     Container(color: Colors.white),
     Container(color: Colors.green),
     Container(color: Colors.pink),
@@ -24,7 +25,6 @@ class _MainLayerState extends State<MainLayer> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.red,
       body: tabs[currentTab],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentTab,
