@@ -9,4 +9,6 @@ class AppConsts {
   static const String mainHeader = 'assets/images/main_header.png';
   static const String suraCard = 'assets/images/sura_card.png';
   static const String hadeethBg = 'assets/images/hadeeth_bg.png';
+  static const String hadeethCard = 'assets/images/hadeeth_card.png';
+  static const String suraDetailsBg = 'assets/images/sura_details_bg.png';
 }

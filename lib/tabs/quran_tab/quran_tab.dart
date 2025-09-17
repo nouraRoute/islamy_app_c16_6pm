@@ -33,8 +33,16 @@ class QuranTab extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: SingleChildScrollView(
-                child: Column(children: [MostRecentView(), SurasListView()]),
+              child: CustomScrollView(
+                slivers: [
+                  SliverList(
+                    delegate: SliverChildListDelegate([MostRecentView()]),
+                  ),
+                  SliverList(
+                    delegate: SliverChildListDelegate([SurasListView()]),
+                  ),
+                  // SurasListView(),
+                ],
               ),
             ),
           ],

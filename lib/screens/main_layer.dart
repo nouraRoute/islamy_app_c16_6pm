@@ -6,6 +6,8 @@ import 'package:islamy_app_c16_6pm/tabs/hadeeth_tab/hadeeth_tab.dart';
 import 'package:islamy_app_c16_6pm/tabs/quran_tab/quran_tab.dart';
 
 class MainLayer extends StatefulWidget {
+  static const String routeName = 'mainLayer';
+
   const MainLayer({super.key});
 
   @override
