@@ -1,5 +1,6 @@
 class AppConsts {
   static const String fontFamily = 'Roboto';
+  static const String mostRecentKey = 'mostRecent';
   static const String hadeethIcon = 'assets/icons/hadeeth.svg';
   static const String quranIcon = 'assets/icons/quran.svg';
   static const String sebhaIcon = 'assets/icons/sebha.svg';

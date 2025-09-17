@@ -3,12 +3,20 @@ import 'package:islamy_app_c16_6pm/common/app_consts.dart';
 import 'package:islamy_app_c16_6pm/theme/app_colors.dart';
 
 class CustomTextField extends StatelessWidget {
-  const CustomTextField({super.key, this.hintText, this.prefixIcon});
+  const CustomTextField({
+    super.key,
+    this.hintText,
+    this.prefixIcon,
+    required this.onChanged,
+  });
   final String? hintText;
   final Widget? prefixIcon;
+  // final TextEditingController controller;
+  final void Function(String) onChanged;
   @override
   Widget build(BuildContext context) {
     return TextField(
+      onChanged: onChanged,
       cursorColor: AppColors.goldColor,
       style: TextStyle(
         color: Colors.white,

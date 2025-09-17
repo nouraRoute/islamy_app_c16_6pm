@@ -1,13 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:islamy_app_c16_6pm/common/app_consts.dart';
 import 'package:islamy_app_c16_6pm/models/sura_model.dart';
 import 'package:islamy_app_c16_6pm/tabs/quran_tab/sura_details.dart';
 import 'package:islamy_app_c16_6pm/theme/app_colors.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SurasListView extends StatelessWidget {
-  const SurasListView({super.key});
-
+  const SurasListView({
+    required this.searchText,
+    super.key,
+    required this.onNav,
+  });
+  final String searchText;
+  final void Function() onNav;
   @override
   Widget build(BuildContext context) {
+    List<SuraModel> suras = SuraModel.getSurasList
+        .where(
+          (element) =>
+              element.arName.contains(searchText) ||
+              element.enName.toLowerCase().contains(searchText.toLowerCase()),
+        )
+        .toList();
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Column(
@@ -26,12 +41,16 @@ class SurasListView extends StatelessWidget {
             shrinkWrap: true,
             physics: NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
-              List<SuraModel> suras = SuraModel.getSurasList;
               SuraModel curranSura = suras[index];
               return ListTile(
-                onTap: () => Navigator.of(
-                  context,
-                ).pushNamed(SuraDetails.routeName, arguments: curranSura),
+                onTap: () {
+                  cashSuraToList(curranSura.index).then((value) => onNav());
+
+                  //cash sura id in the list
+                  Navigator.of(
+                    context,
+                  ).pushNamed(SuraDetails.routeName, arguments: curranSura);
+                },
                 minVerticalPadding: 0,
                 contentPadding: EdgeInsets.zero,
                 title: Text(
@@ -78,7 +97,7 @@ class SurasListView extends StatelessWidget {
                 ),
               );
             },
-            itemCount: SuraModel.getSurasList.length,
+            itemCount: suras.length,
             separatorBuilder: (BuildContext context, int index) {
               return Divider(
                 endIndent: 65,
@@ -91,5 +110,14 @@ class SurasListView extends StatelessWidget {
       ),
     );
   }
+
+  Future cashSuraToList(int index) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    List<String> data = pref.getStringList(AppConsts.mostRecentKey) ?? [];
+    Set<String> temp = data.toSet();
+    data = temp.toList();
+    data.remove(index.toString());
+    data.add(index.toString());
+    pref.setStringList(AppConsts.mostRecentKey, data);
+  }
 }
-//custon scroll view
